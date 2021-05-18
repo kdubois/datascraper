@@ -1,8 +1,32 @@
-# datascraper project
+# datascraper project (WIP)
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+This Quarkus project scrapes a website (Bruvax) to see if a value in the content has changed, and in that case it sends a Telegram notification. 
 
-If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+There are 2 components:
+    * A data scraper REST service (DataScraper.java)
+    * A Camel Route (BruvaxBot.java) that consumes the datascraper website, compares with an existing value stored in a config map, and if the value has changed, it will send a Telegram notification 
+
+# You will need to create a Telegram bot 
+Go to https://core.telegram.org/bots#6-botfather and follow the instructions to create a Telegram Bot.  Add it to a group chat (or create one).  
+You will need to retrieve the bot's token, and the chat id of the chat where you want the message to appear.  
+
+# Store Telegram token and chat id 
+Either store them directly in the application.properties file, or (preferably) store them in a Kubernetes secret.  To do this, add the values to a kubefiles/secrets.yml (there's a secrets-example.yml you can use as a template)
+
+`kubectl apply -f kubefiles/configmap.yml kubefiles/secrets.yml kubefiles/rbac.yml -n datascraper`
+
+# Build & deploy the application
+Either deploy the application as a normal kubernetes deployment with
+`./mvnw clean package -Dquarkus.kubernetes.deploy=true`
+
+Or, you can deploy it as a native built serverless app with the following commands (replace the registry url with your own)
+```shell script 
+./mvnw package -Pnative -Dquarkus.native.container-build=true -Dquarkus.native.container-runtime=podman -Dquarkus.native.builder-image=registry.access.redhat.com/quarkus/mandrel-20-rhel8:20.3
+podman build -f src/main/docker/Dockerfile.native -t quay.io/kevindubois/bruvax:latest .
+podman push quay.io/kevindubois/bruvax:latest
+kn service update bruvax --image=quay.io/kevindubois/bruvax
+```
+
 
 ## Running the application in dev mode
 
@@ -45,14 +69,6 @@ You can then execute your native executable with: `./target/datascraper-1.0.0-SN
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.html.
 
-## Related guides
 
-- Logging JSON ([guide](https://quarkus.io/guides/logging#json-logging)): Add JSON formatter for console logging
 
-## Provided examples
 
-### Logging JSON example
-
-This example lets you go faster with your jet aircraft. Your speed is logged when you send a new request.<br/> When you reach the speed of sound, a "Sonic Boom" error is going to be thrown and logged. Boom!
-
-[Related guide section...](https://quarkus.io/guides/logging#configuration)
