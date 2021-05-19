@@ -39,4 +39,4 @@ nb-configuration.xml
 .env
 
 # secrets
-kubefiles/secrets.yml
+kubefiles/secrets.yaml

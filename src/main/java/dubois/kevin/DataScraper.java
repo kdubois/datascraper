@@ -26,13 +26,13 @@ public class DataScraper {
   private static final String REFERRER = "http://www.google.com";
   
   @ConfigProperty(name = "searchstring")
-  private String SEARCHSTRING;
+  String SEARCHSTRING;
 
   @ConfigProperty(name = "bruvaxyear")
-  private String bruvaxYearProperty;
+  String bruvaxYearProperty;
 
   @ConfigProperty(name = "bruvaxurl")
-  private String url;
+  String url;
 
   @GET
   @Path("/getBruvaxYear")

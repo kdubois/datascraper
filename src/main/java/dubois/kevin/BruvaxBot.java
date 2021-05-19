@@ -9,10 +9,11 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 public class BruvaxBot extends RouteBuilder{
 
     @ConfigProperty(name = "token")
-    private String telegramToken;
+    String telegramToken;
+
 
     @ConfigProperty(name = "chatid")
-    private String chatId;
+    String chatId;
 
     @Override
     public void configure() throws Exception {        
