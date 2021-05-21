@@ -1,4 +1,4 @@
-package dubois.kevin;
+package com.kevin;
 
 import javax.enterprise.context.ApplicationScoped;
 
@@ -16,7 +16,7 @@ public class BruvaxBot extends RouteBuilder{
     String chatId;
 
     @Override
-    public void configure() throws Exception {        
+    public void configure() throws Exception {                        
         from("timer:tick?repeatCount=1")        
         .bean(DataScraper.class, "getYear")
         .log("Current year from getBruvaxYear is ${body.currentYear}")
@@ -25,7 +25,6 @@ public class BruvaxBot extends RouteBuilder{
         .setBody().simple("The current vaccination registration year has changed and is now ${body.currentYear}!")
         .log("Sending to Telegram with token " + telegramToken + " and chatId " + chatId)
         .to("telegram:bots?authorizationToken=" + telegramToken + "&chatId=" + chatId)
-        .log("message sent"); 
-        
+        .log("message sent");         
     }
 }

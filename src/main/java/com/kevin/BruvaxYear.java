@@ -1,4 +1,4 @@
-package dubois.kevin;
+package com.kevin;
 
 public class BruvaxYear {
     public String currentYear;
