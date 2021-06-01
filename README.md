@@ -14,8 +14,9 @@ You will need to retrieve the bot's token, and the chat id of the chat where you
 # Store Telegram token and chat id 
 
 Either store them directly in the application.properties file, or (preferably) store them in a Kubernetes secret.  To do this, add the values to a kubefiles/secrets.yml (there's a secrets-example.yml you can use as a template)
-
-`kubectl apply -f kubefiles/configmap.yaml -f kubefiles/secrets.yaml`
+```shell script
+kubectl apply -f kubefiles/configmap.yaml -f kubefiles/secrets.yaml
+```
 
 ## Running the application in dev mode
 
@@ -28,9 +29,12 @@ You can run your application in dev mode that enables live coding using:
 # Build & deploy the application
 
 If you're running Openshift, you can build the app as a native binary trigger a knative serverless deployment easy-peasy with the following maven command:
-`./mvnw clean package -Pnative -Dquarkus.kubernetes.deploy=true`
+```shell script
+./mvnw clean package -Pnative -Dquarkus.kubernetes.deploy=true
+```
 (make sure you have installed the Openshift Serverless operator!)
 
 The camel route will run once and then scale down to 0, so if you want to trigger it on a regular interval, you could add a Pingsource to the app:
-
-`kubectl apply -f kubefiles/pingsource.yaml`
+```shell script
+kubectl apply -f kubefiles/pingsource.yaml
+```
