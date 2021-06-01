@@ -8,6 +8,11 @@ import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+import io.quarkus.arc.Unremovable;
+import io.quarkus.runtime.annotations.RegisterForReflection;
+
+@Unremovable
+@RegisterForReflection
 @ApplicationScoped
 public class ScraperService {
 

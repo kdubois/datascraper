@@ -11,7 +11,6 @@ public class BruvaxBot extends RouteBuilder{
     @ConfigProperty(name = "token")
     String telegramToken;
 
-
     @ConfigProperty(name = "chatid")
     String chatId;
 
@@ -24,6 +23,7 @@ public class BruvaxBot extends RouteBuilder{
         .choice().when().simple("${body.currentYear} > ${body.previousYear}")
         .setBody().simple("The current vaccination registration year has changed and is now ${body.currentYear}!")
         .log("Sending to Telegram with token " + telegramToken + " and chatId " + chatId)
+        .choice().when(x -> Integer.parseInt(chatId) != 0)
         .to("telegram:bots?authorizationToken=" + telegramToken + "&chatId=" + chatId)
         .log("message sent");         
     }

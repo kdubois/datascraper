@@ -1,0 +1,18 @@
+# apiVersion: sources.knative.dev/v1beta1 #uncomment in favor of the next line if running ocp 4.6
+apiVersion: sources.knative.dev/v1beta2
+kind: PingSource
+metadata:
+  name: ping-source
+  finalizers:
+    - pingsources.sources.knative.dev
+  labels:
+    app: ping-source
+    app.kubernetes.io/component: ping-source
+    app.kubernetes.io/instance: ping-source
+spec:
+  schedule: '*/10 * * * *'
+  sink:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: datascraper

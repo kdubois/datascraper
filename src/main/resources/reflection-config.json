@@ -1,0 +1,38 @@
+[
+    {
+      "name" : "com.kevin.DataScraper",
+      "allDeclaredConstructors" : true,
+      "allPublicConstructors" : true,
+      "allDeclaredMethods" : true,
+      "allPublicMethods" : true,
+      "allDeclaredFields" : true,
+      "allPublicFields" : true
+    },
+    {
+      "name" : "com.kevin.ScraperService",
+      "allDeclaredConstructors" : true,
+      "allPublicConstructors" : true,
+      "allDeclaredMethods" : true,
+      "allPublicMethods" : true,
+      "allDeclaredFields" : true,
+      "allPublicFields" : true
+    },
+    {
+      "name" : "org.jboss.logging.Logger",
+      "allDeclaredConstructors" : true,
+      "allPublicConstructors" : true,
+      "allDeclaredMethods" : true,
+      "allPublicMethods" : true,
+      "allDeclaredFields" : true,
+      "allPublicFields" : true
+    },
+    {
+      "name" : "com.kevin.BruvaxYear",
+      "allDeclaredConstructors" : true,
+      "allPublicConstructors" : true,
+      "allDeclaredMethods" : true,
+      "allPublicMethods" : true,
+      "allDeclaredFields" : true,
+      "allPublicFields" : true
+    }
+  ]

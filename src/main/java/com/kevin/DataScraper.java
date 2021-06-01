@@ -4,20 +4,20 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.jboss.logging.Logger;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import io.quarkus.arc.Unremovable;
-
-import org.jboss.logging.Logger;
+import io.quarkus.runtime.annotations.RegisterForReflection;
 
 @Unremovable
 @ApplicationScoped
+@RegisterForReflection
 public class DataScraper {
 
-  @Inject
-  Logger log;
+  private static final Logger LOG = Logger.getLogger(DataScraper.class);
 
   @Inject
   ScraperService scraperService;
@@ -40,7 +40,7 @@ public class DataScraper {
     try {
       currentYear = extractYear(scraperService.fetchPage(url));
     } catch (Exception e) {
-      log.error("Could not get the bruvax year.  Maybe the website is down or has changed :( .  The error was: " + e.getMessage() );
+      LOG.error("Could not get the bruvax year.  Maybe the website is down or has changed :( .  The error was: " + e.getMessage() );
       currentYear = "0";
     }        
     return new BruvaxYear(currentYear, previousYear);
