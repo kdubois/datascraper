@@ -3,8 +3,9 @@
 This Camel Quarkus project scrapes a website (Bruvax) to see if a value in the content has changed, and in that case it sends a Telegram notification. 
 
 There are 2 components:
-    * A data scraper bean and service (DataScraper.java)
-    * A Camel Route (BruvaxBot.java) that consumes the datascraper website, compares with an existing value stored in a config map, and if the value has changed, it will send a Telegram notification 
+
+    - A DataScraper bean and service (DataScraper.java / ScraperService.java)
+    - A Camel Route (BruvaxBot.java) that consumes the datascraper website, compares with an existing value stored in a config map, and if the value has changed, it will send a Telegram notification 
 
 # You will need to create a Telegram bot 
 
