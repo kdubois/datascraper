@@ -7,16 +7,16 @@ There are 2 components:
     - A DataScraper bean and service (DataScraper.java / ScraperService.java)
     - A Camel Route (BruvaxBot.java) that consumes the datascraper website, compares with an existing value stored in a config map, and if the value has changed, it will send a Telegram notification 
 
-# You will need to create a Telegram bot 
+## Create a Telegram bot 
 
 Go to https://core.telegram.org/bots#6-botfather and follow the instructions to create a Telegram Bot.  Add it to a group chat (or create one).  
 You will need to retrieve the bot's token, and the chat id of the chat where you want the message to appear.  
 
-# Store Telegram token and chat id 
+## Store Telegram token and chat id 
 
-Either store them directly in the application.properties file, or (preferably) store them in a Kubernetes secret.  To do this, add the values to a kubefiles/secrets.yml (there's a secrets-example.yml you can use as a template)
+Either store them directly in the application.properties file, or (preferably) store them in a Kubernetes secret.  To do this, add the values to a kubefiles/secrets.yml (there's a secrets-example.yaml you can use as a template)
 ```shell script
-kubectl apply -f kubefiles/configmap.yaml -f kubefiles/secrets.yaml
+kubectl apply -f kubefiles/configmap.yaml -f kubefiles/secrets.yaml -f kubefiles/rbac.yaml
 ```
 
 ## Running the application in dev mode
@@ -27,7 +27,7 @@ You can run your application in dev mode that enables live coding using:
 ```
 > **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
 
-# Build & deploy the application
+## Build & deploy the application
 
 If you're running Openshift, you can build the app as a native binary trigger a knative serverless deployment easy-peasy with the following maven command:
 ```shell script
