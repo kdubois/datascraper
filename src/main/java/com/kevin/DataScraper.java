@@ -9,6 +9,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import io.fabric8.kubernetes.api.model.ConfigMapBuilder;
+import io.fabric8.kubernetes.client.KubernetesClient;
 import io.quarkus.arc.Unremovable;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 
@@ -21,6 +23,9 @@ public class DataScraper {
 
   @Inject
   ScraperService scraperService;
+
+  @Inject 
+  KubernetesClient kubernetesClient;
   
   @ConfigProperty(name = "bruvax.search.string")
   String searchString;
@@ -34,15 +39,21 @@ public class DataScraper {
   @ConfigProperty(name = "bruvax.url")
   String url;
 
+  @ConfigProperty(name = "quarkus.kubernetes-config.config-maps")
+  String configMapName;
+
   public BruvaxYear getYear() throws Exception {
     String currentYear;
 
     try {
-      currentYear = extractYear(scraperService.fetchPage(url));
+      currentYear = extractYear(scraperService.fetchPage(url));  
+       // update configmap with latest data
+      updateConfigMap(currentYear);         
     } catch (Exception e) {
       LOG.error("Could not get the bruvax year.  Maybe the website is down or has changed :( .  The error was: " + e.getMessage() );
       currentYear = "0";
-    }        
+    }       
+
     return new BruvaxYear(currentYear, previousYear);
   }
 
@@ -65,5 +76,14 @@ public class DataScraper {
     }
 
     return result;
+  }
+
+  private void updateConfigMap(String year) {
+    try {
+      kubernetesClient.configMaps().withName(configMapName).edit(c -> new ConfigMapBuilder(c).addToData("bruvax.year", year).build());      
+    } catch (Exception e) {
+      // log error but continue program 
+      LOG.error("Non-fatal error: Could not update configmap: " + e.getMessage());
+    }
   }
 }

@@ -2,12 +2,12 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   namespace: datascraper
-  name: configmap-secret-updater
+  name: configmap-updater
 rules:
 - apiGroups: [""]
-  resources: ["configmaps", "secrets"]
-  resourceNames: ["bruvaxyear", "telegram"]
-  verbs: ["update", "get"]
+  resources: ["configmaps"]
+  resourceNames: ["bruvaxyear"]
+  verbs: ["patch"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -16,10 +16,10 @@ metadata:
   namespace: datascraper
 subjects:
 - kind: ServiceAccount
-  name: default 
+  name: datascraper 
   namespace: datascraper
 roleRef:
   kind: Role 
-  name: configmap-secret-updater
+  name: configmap-updater
   namespace: datascraper
   apiGroup: rbac.authorization.k8s.io
