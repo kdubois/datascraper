@@ -1,5 +1,5 @@
-apiVersion: sources.knative.dev/v1beta1 #uncomment in favor of the next line if running ocp 4.6
-# apiVersion: sources.knative.dev/v1beta2
+#apiVersion: sources.knative.dev/v1beta1 #uncomment in favor of the next line if running ocp 4.6
+apiVersion: sources.knative.dev/v1beta2
 kind: PingSource
 metadata:
   name: ping-source

@@ -65,7 +65,7 @@ public class DataScraper {
         // iterate through html link elements and search for a match to our search string
         if (el.text().startsWith(searchString)) {
           int len = searchString.length();  
-          // extract the next 4 characters (the year)      
+          // extract the next x characters (the year)      
           result = el.text().substring(len, len + Integer.valueOf(yearLen));
           break;
         }

@@ -41,9 +41,9 @@ public class DataScraperTest {
 
     @Test
     public void testGetYear () throws Exception {
-        setup("Toutes les personnes nées en 1980");
-        String previousYear = "1980";
-        String currentYear = "1980";
+        setup("Toutes les personnes à partir de 18 ans");
+        String previousYear = "18";
+        String currentYear = "18";
         
         BruvaxYear bruvaxYear = dataScraper.getYear();
 
@@ -54,7 +54,7 @@ public class DataScraperTest {
     @Test
     public void testGetYearFail () throws Exception {
         setup("badString");
-        String previousYear = "1980";
+        String previousYear = "18";
         String currentYear = "0";
 
         BruvaxYear bruvaxYear = dataScraper.getYear();

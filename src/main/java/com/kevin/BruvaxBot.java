@@ -21,7 +21,7 @@ public class BruvaxBot extends RouteBuilder{
         .log("Current year from getBruvaxYear is ${body.currentYear}")
         .log("Previous year from getBruvaxYear is ${body.previousYear}")
         .choice().when().simple("${body.currentYear} > ${body.previousYear}")
-        .setBody().simple("The current vaccination registration year has changed and is now ${body.currentYear}!")
+        .setBody().simple("The current vaccination registration age has changed and is now > ${body.currentYear} years old!")
         .log("Sending to Telegram")
         .choice().when(x -> Integer.parseInt(chatId) != 0)
         .to("telegram:bots?authorizationToken=" + telegramToken + "&chatId=" + chatId)
