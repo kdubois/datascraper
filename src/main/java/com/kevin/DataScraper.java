@@ -53,6 +53,7 @@ public class DataScraper {
       LOG.error("Could not get the bruvax year.  Maybe the website is down or has changed :( .  The error was: " + e.getMessage() );
       currentYear = "0";
     }       
+    
 
     return new BruvaxYear(currentYear, previousYear);
   }
