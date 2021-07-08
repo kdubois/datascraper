@@ -1,5 +1,5 @@
 FROM ubi8/ubi-minimal
 
-COPY /target/quarkus-app /app
+COPY /target/*runner /app/runner
 
-ENTRYPOINT [ "/app" ]
+ENTRYPOINT [ "/app/runner" ]
