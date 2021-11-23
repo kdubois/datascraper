@@ -10,7 +10,7 @@ There are 2 components:
 ## Create a Telegram bot 
 
 Go to https://core.telegram.org/bots#6-botfather and follow the instructions to create a Telegram Bot.  Add it to a group chat (or create one).  
-You will need to retrieve the bot's token, and the chat id of the chat where you want the message to appear.  
+You will need to retrieve the bo -Pnative -Dquarkus.kubernetes.deploy=truet's token, and the chat id of the chat where you want the message to appear.  
 
 ## Store Telegram token and chat id 
 
