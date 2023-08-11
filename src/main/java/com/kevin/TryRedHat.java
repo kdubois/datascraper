@@ -2,7 +2,7 @@ package com.kevin;
 
 import java.util.Arrays;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class TryRedHat {

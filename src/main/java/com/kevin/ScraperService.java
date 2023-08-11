@@ -2,7 +2,7 @@ package com.kevin;
 
 import java.io.IOException;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
